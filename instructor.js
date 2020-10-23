@@ -10,7 +10,14 @@ exports.show = function(req,res){
 
     if (!foundInstructor) return res.send('instructor not found!')
 
-    return res.send(foundInstructor)
+    const instructor = {
+        ...foundInstructor,
+        age:"",
+        services:foundInstructor.services.split(","),
+        create_at:"",
+    }
+
+    return res.render("instructors/show", {instructor: instructor})
 }
 
 // create
@@ -54,4 +61,4 @@ exports.post = function(req,res){
 
 // update
 
-//delete
+//deletes
