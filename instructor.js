@@ -1,5 +1,6 @@
 const fs = require('fs')
 const date = require('./data.json')
+const { age, data } = require('./utils')
 
 exports.show = function(req,res){
     const { id } = req.params
@@ -10,11 +11,14 @@ exports.show = function(req,res){
 
     if (!foundInstructor) return res.send('instructor not found!')
 
+    
+   
+    
     const instructor = {
         ...foundInstructor,
-        age:"",
+        age:age(foundInstructor.birth),
         services:foundInstructor.services.split(","),
-        create_at:"",
+        create_at: new Intl.DateTimeFormat("pt-BR").format(foundInstructor.create_at),
     }
 
     return res.render("instructors/show", {instructor: instructor})
@@ -33,7 +37,7 @@ exports.post = function(req,res){
         }
         
         //Destruturar o obejto
-        let { avartar_url, birth ,name ,gender ,services  } = req.body
+        let { avatar_url, birth ,name ,gender ,services  } = req.body
 
         birth = Date.parse(req.body.birth)
         const id = Number(date.instructors.length + 1)
@@ -42,7 +46,7 @@ exports.post = function(req,res){
 
         date.instructors.push({
             id,
-            avartar_url,
+            avatar_url,
             name,
             birth,
             gender,
@@ -59,6 +63,55 @@ exports.post = function(req,res){
         
     }
 
-// update
+// edit
+
+exports.edit = function(req, res){
+    const { id } = req.params
+
+    const foundInstructor = date.instructors.find(function(instructor){
+        return instructor.id == id
+    })
+
+    if (!foundInstructor) return res.send('instructor not found!') 
+
+    const instructor = {
+        ...foundInstructor,
+        birth: data(foundInstructor.birth)
+    }
+   
+
+    return res.render('instructors/edit', { instructor })
+}
+
+//put
+
+exports.put = function(req, res){
+    const { id } = req.body
+    let index = 0
+
+    const foundInstructor = date.instructors.find(function(instructor, foundIndex){
+        if (id == instructor.id) {
+            index = foundIndex
+            return true
+        }
+    })
+
+    if (!foundInstructor) return res.send('instructor not found!') 
+
+    const instructor = {
+        ...foundInstructor,
+        ...req.body,
+        birth: Date.parse(req.body.birth)
+    }
+
+    date.instructors[index] = instructor
+
+    fs.writeFile("data.json", JSON.stringify(date, null, 2), function (err){
+        if(err) return res.send("write Erros!")
+
+        return res.redirect(`/instructors/${id}`)
+    })
+
+}
 
 //deletes
