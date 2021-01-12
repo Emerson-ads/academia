@@ -2,6 +2,11 @@ const fs = require('fs')
 const date = require('./data.json')
 const { age, data } = require('./utils')
 
+
+exports.index = function(req, res){
+    return res.render("instructors/index", { instructor: date.instructors})
+}
+
 exports.show = function(req,res){
     const { id } = req.params
 
@@ -115,3 +120,19 @@ exports.put = function(req, res){
 }
 
 //deletes
+
+exports.delete = function(req, res) {
+    const { id } = req.body
+
+    const filteredInstructors = date.instructors.filter(function(instructor){
+        return instructor.id != id
+    })
+
+    date.instructors = filteredInstructors
+
+     fs.writeFile("data.json",JSON.stringify(date, null, 2), function(err){
+         if (err)return res.send("write fail erro")
+         
+        return res.redirect("/instructors")
+     })
+}
