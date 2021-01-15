@@ -1,14 +1,6 @@
 {
+  "members": [],
   "instructors": [
-    {
-      "id": 6,
-      "avatar_url": "https://source.unsplash.com/collection/1958977/500x500",
-      "name": "Emerson",
-      "birth": 921628800000,
-      "gender": "M",
-      "services": "Musculação, pilar, yoga",
-      "create_at": 1607180449175
-    },
     {
       "id": 7,
       "avatar_url": "https://source.unsplash.com/collection/1958977/500x500",
@@ -28,12 +20,12 @@
       "create_at": 1607192924187
     },
     {
-      "id": "4",
+      "id": 4,
       "avatar_url": "https://scontent.fcgh37-1.fna.fbcdn.net/v/t1.0-9/133357739_3599838816776200_4566331125254292167_n.jpg?_nc_cat=111&ccb=2&_nc_sid=09cbfe&_nc_eui2=AeHRZQqOf_DcEnVJETjgtgy30_ykyyly6tbT_KTLKXLq1ux6mzXG-ngLo7ktexw86Fx_-rPWYdTxHl0fvw9e-d8V&_nc_ohc=4oLEic2MJuYAX9LBxtG&_nc_ht=scontent.fcgh37-1.fna&oh=554004833f0806db96d8c54d692d3701&oe=60219173",
-      "name": "Emerson da Silva Mendonça",
+      "name": "Emerson da S. Mendonça",
       "birth": 890092800000,
       "gender": "M",
-      "services": "futebol, tapa de qualidade, enfiada em profundidade",
+      "services": "futebol, tapa de qualidade",
       "create_at": 1610371611278
     },
     {
